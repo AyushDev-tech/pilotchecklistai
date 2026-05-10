@@ -1,0 +1,243 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #0F1415;
+  --foreground: #E6F1E2;
+  --primary: #0052CC;
+  --primary-foreground: #FFFFFF;
+  --secondary: #1A1F22;
+  --secondary-foreground: #E6F1E2;
+  --accent: #1A6EFF;
+  --accent-foreground: #FFFFFF;
+  --muted: #2A3035;
+  --muted-foreground: #7A8A82;
+  --card: #1A1F22;
+  --card-foreground: #E6F1E2;
+  --border: #2A3035;
+  --input: #1A1F22;
+  --ring: #0052CC;
+  --radius: 12px;
+  --font-sans: var(--font-geist), 'Geist', sans-serif;
+  --font-mono: var(--font-ibm-plex-mono), 'IBM Plex Mono', monospace;
+  --warning-red: #E3132C;
+  --warning-amber: #FF8F00;
+  --warning-emergency: #B00020;
+  --success: #00C48C;
+  --surface-elevated: #222830;
+}
+
+@layer base {
+  * {
+    box-sizing: border-box;
+    border-color: var(--border);
+  }
+
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  h1, h2, h3, h4, h5, h6, p {
+    margin: 0;
+  }
+}
+
+@layer utilities {
+  .font-mono-data {
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .glass-surface {
+    background: rgba(26, 31, 34, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(42, 48, 53, 0.8);
+  }
+
+  .glass-card {
+    background: rgba(34, 40, 48, 0.7);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(0, 82, 204, 0.15);
+  }
+
+  .glow-blue {
+    box-shadow: 0 0 20px rgba(0, 82, 204, 0.25), 0 0 40px rgba(0, 82, 204, 0.1);
+  }
+
+  .glow-blue-sm {
+    box-shadow: 0 0 10px rgba(0, 82, 204, 0.3);
+  }
+
+  .glow-red {
+    box-shadow: 0 0 16px rgba(227, 19, 44, 0.3), 0 0 32px rgba(227, 19, 44, 0.1);
+  }
+
+  .glow-amber {
+    box-shadow: 0 0 16px rgba(255, 143, 0, 0.25);
+  }
+
+  .text-hero-xl {
+    font-size: clamp(1.5rem, 5vw, 2.25rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+  }
+
+  .text-section-label {
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .gradient-primary {
+    background: linear-gradient(135deg, #0052CC 0%, #1A6EFF 100%);
+  }
+
+  .gradient-warning {
+    background: linear-gradient(135deg, #E3132C 0%, #FF4D5E 100%);
+  }
+
+  .gradient-caution {
+    background: linear-gradient(135deg, #FF8F00 0%, #FFB300 100%);
+  }
+
+  .cockpit-grid {
+    background-image:
+      linear-gradient(rgba(0, 82, 204, 0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0, 82, 204, 0.04) 1px, transparent 1px);
+    background-size: 32px 32px;
+  }
+
+  .emergency-pulse {
+    animation: emergency-pulse 2s ease-in-out infinite;
+  }
+
+  .step-number {
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+  }
+
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .blob-primary {
+    background: radial-gradient(ellipse at center, rgba(0, 82, 204, 0.15) 0%, transparent 70%);
+    filter: blur(40px);
+    pointer-events: none;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply gradient-primary text-white font-semibold px-6 py-3 rounded-xl transition-all duration-150 active:scale-95 hover:opacity-90 disabled:opacity-40 disabled:cursor-not-allowed disabled:active:scale-100;
+  }
+.btn-secondary  {
+    @apply bg-muted text-foreground font-medium px-5 py-2.5 rounded-xl border border-border transition-all duration-150 active:scale-95 disabled:opacity-40;
+  }
+.btn-ghost  {
+    @apply text-muted-foreground font-medium px-4 py-2 rounded-lg transition-all duration-150 hover:text-foreground active:scale-95;
+  }
+.input-cockpit  {
+    @apply w-full bg-input border border-border rounded-xl px-4 py-3 text-foreground placeholder-muted-foreground text-sm focus:outline-none focus:ring-2 transition-all duration-200;
+  }
+
+  .nav-tab {
+    @apply flex flex-col items-center justify-center gap-1 py-2 px-3 rounded-xl transition-all duration-200 flex-1 min-w-0;
+  }
+
+  .nav-tab-active {
+    @apply text-primary;
+  }
+
+  .nav-tab-inactive {
+    @apply text-muted-foreground hover:text-foreground;
+  }
+
+  .warning-card-emergency {
+    @apply bg-[#1C0A0D] border border-[#E3132C]/40 rounded-xl p-4;
+    box-shadow: 0 0 16px rgba(227, 19, 44, 0.15);
+  }
+
+  .warning-card-warning {
+    @apply bg-[#1C0E0A] border border-[#E3132C]/30 rounded-xl p-4;
+  }
+
+  .warning-card-caution {
+    @apply bg-[#1C1200] border border-[#FF8F00]/30 rounded-xl p-4;
+  }
+
+  .checklist-section-header {
+    @apply flex items-center gap-2 px-1 py-2 text-section-label text-muted-foreground;
+  }
+.checklist-item  {
+    @apply flex items-start gap-3 py-3 px-4 rounded-lg transition-all duration-150 cursor-pointer;
+  }
+
+  .flashcard-surface {
+    @apply glass-card rounded-2xl p-6 min-h-[260px] flex flex-col justify-between;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(0, 82, 204, 0.1);
+  }
+
+  .progress-track {
+    @apply w-full h-1.5 bg-muted rounded-full overflow-hidden;
+  }
+
+  .progress-fill {
+    @apply h-full gradient-primary rounded-full transition-all duration-500 ease-out;
+  }
+}
+
+@keyframes emergency-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(227, 19, 44, 0.4); }
+  50% { box-shadow: 0 0 0 8px rgba(227, 19, 44, 0); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.skeleton {
+  background: linear-gradient(90deg, var(--muted) 25%, var(--surface-elevated) 50%, var(--muted) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.6s ease-in-out infinite;
+}
+
+@keyframes fade-in-up {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 0.35s ease-out forwards;
+}
+
+@keyframes card-appear {
+  from { opacity: 0; transform: translateY(8px) scale(0.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.animate-card-appear {
+  animation: card-appear 0.3s ease-out forwards;
+}
